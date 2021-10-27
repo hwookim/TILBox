@@ -8,9 +8,7 @@
     "start": "next start",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "storybook": "start-storybook -p 6006",
-    "test": "jest --watchAll",
-    "build-storybook": "build-storybook",
-    "chromatic": "chromatic --project-token=$(grep CHROMATIC_TOKEN .env | cut -d '=' -f2)"
+    "test": "jest --watchAll"
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",
@@ -32,7 +30,6 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "babel-loader": "^8.2.2",
-    "chromatic": "^6.0.4",
     "eslint": "^8.0.1",
     "eslint-config-next": "^11.1.2",
     "eslint-config-prettier": "^8.3.0",
