@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "test": "jest --watchAll",
+    "storybook": "start-storybook -p 6006",
     "start": "next start",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "storybook": "start-storybook -p 6006",
-    "test": "jest --watchAll"
+    "build": "next build",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",
