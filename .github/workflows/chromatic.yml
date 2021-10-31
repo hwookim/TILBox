@@ -27,5 +27,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           workingDir: client
           exitOnceUploaded: true
-        env:
-          CHROMATIC_STORYBOOK_VERSION: react@6.0.28
