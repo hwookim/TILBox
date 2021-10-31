@@ -5,7 +5,7 @@ on:
     paths:
       - client/**
     branches:
-      - main
+      - **
 
 jobs:
   test:
