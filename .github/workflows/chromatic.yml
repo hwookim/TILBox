@@ -6,19 +6,28 @@ on:
       - client/**
     branches:
       - '**'
+
 jobs:
-  test:
-    # Operating System
+  deploy-chromatic:
     runs-on: ubuntu-latest
-    # Job steps
+    defaults:
+      run:
+        working-directory: ./client
+
     steps:
       - uses: actions/checkout@v1
-      - run: yarn
-        working-directory: client
-        #👇 Adds Chromatic as a step in the workflow
-      - uses: chromaui/action@v1
-        # Options required for Chromatic's GitHub Action
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
           workingDir: client
+          exitZeroOnChanges: true
+          allowConsoleErrors: true
+          buildScriptName: "build:storybook"
+        env:
+          CHROMATIC_STORYBOOK_VERSION: react@6.0.28
