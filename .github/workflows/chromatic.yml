@@ -25,4 +25,3 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          workingDir: client
