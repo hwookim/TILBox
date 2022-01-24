@@ -43,6 +43,10 @@ jobs:
           yarn rebuild
           yarn build
 
+      - name: MSW
+        run: |
+          npx msw init public/ -save
+
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
