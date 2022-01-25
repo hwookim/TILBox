@@ -10,9 +10,7 @@
     "start": "next start",
     "build": "next build",
     "test:coverage": "yarn test --watchAll=false --coverage",
-    "build-storybook": "build-storybook -s public",
-    "msw:update": "msw init public",
-    "chromatic": "chromatic --project-token=$(grep CHROMATIC_TOKEN .env | cut -d '=' -f2)"
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",

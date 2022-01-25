@@ -31,13 +31,11 @@ jobs:
           echo "API_PORT=$API_PORT" >> .env
           echo "API_VERSION=$API_VERSION" >> .env
           echo "API_HOST=$API_HOST" >> .env
-          echo "CHROMATIC_TOKEN=$CHROMATIC_TOKEN" >> .env
         env:
           API_HOSTNAME: ${{ secrets.API_HOSTNAME }}
           API_PORT: ${{ secrets.API_PORT }}
           API_VERSION: ${{ secrets.API_VERSION }}
           API_HOST: ${{ secrets.API_HOST }}
-          CHROMATIC_TOKEN: ${{ secrets.CHROMATIC_TOKEN }}
 
       - name: Install dependencies
         run: |
@@ -45,10 +43,9 @@ jobs:
           yarn rebuild
           yarn build
 
-      - name: MSW
-        run: |
-          yarn msw:update
-
       - name: Publish to Chromatic
         run: |
-          yarn chromatic --exit-once-uploaded
+          yarn msw init public/ -save
+          yarn chromatic --project-token=$CHROMATIC_TOKEN --exit-zero-on-changes
+        env:
+          CHROMATIC_TOKEN: ${{ secrets.CHROMATIC_TOKEN }}

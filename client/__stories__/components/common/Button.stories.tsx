@@ -62,5 +62,5 @@ Large.args = {
 export const Wide = Template.bind({});
 Wide.args = {
   ...Default.args,
-  width: '266px',
+  width: '100%',
 };
