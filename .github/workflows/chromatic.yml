@@ -43,9 +43,13 @@ jobs:
           yarn rebuild
           yarn build
 
-      - name: Publish to Chromatic
+      - name: Init msw
         run: |
           yarn msw init public/ -save
-          yarn chromatic --project-token=$CHROMATIC_TOKEN --exit-zero-on-changes
-        env:
-          CHROMATIC_TOKEN: ${{ secrets.CHROMATIC_TOKEN }}
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+          workingDir: client
