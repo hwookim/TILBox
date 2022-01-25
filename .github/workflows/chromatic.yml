@@ -27,15 +27,17 @@ jobs:
 
       - name: Generate Environment Variables File for Production
         run: |
-          echo "API_HOSTNAME=$API_HOSTNAME" >> .env.production
-          echo "API_PORT=$API_PORT" >> .env.production
-          echo "API_VERSION=$API_VERSION" >> .env.production
-          echo "API_HOST=$API_HOST" >> .env.production
+          echo "API_HOSTNAME=$API_HOSTNAME" >> .env
+          echo "API_PORT=$API_PORT" >> .env
+          echo "API_VERSION=$API_VERSION" >> .env
+          echo "API_HOST=$API_HOST" >> .env
+          echo "CHROMATIC_TOKEN=$CHROMATIC_TOKEN" >> .env
         env:
           API_HOSTNAME: ${{ secrets.API_HOSTNAME }}
           API_PORT: ${{ secrets.API_PORT }}
           API_VERSION: ${{ secrets.API_VERSION }}
           API_HOST: ${{ secrets.API_HOST }}
+          CHROMATIC_TOKEN: ${{ secrets.CHROMATIC_TOKEN }}
 
       - name: Install dependencies
         run: |
@@ -45,11 +47,8 @@ jobs:
 
       - name: MSW
         run: |
-          npx msw init public/ -save
+          yarn msw:update
 
       - name: Publish to Chromatic
-        uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          workingDir: client
+        run: |
+          yarn chromatic --exit-once-uploaded
